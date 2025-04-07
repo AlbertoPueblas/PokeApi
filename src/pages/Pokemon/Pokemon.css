@@ -1,0 +1,9 @@
+.pokemon-card {
+    background-image: url('../../images/pngegg.png');
+    background-size: cover;
+}
+
+img {
+    width: 6rem;
+    margin-top: 3rem;
+}
