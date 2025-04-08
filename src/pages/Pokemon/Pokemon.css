@@ -1,9 +1,61 @@
-.pokemon-card {
-    background-image: url('../../images/pngegg.png');
-    background-size: cover;
+.pokedex {
+    margin-top: -14rem;
+    scale: 0.6;
+    width: 106rem;
+    height: 75rem;
+    position: relative;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    background-image: url(../../images/pokedex-png.png);
+  }
+  
+  .img-pokemon {
+    margin-top: 4rem;
+    margin-left: 6rem;
+    margin-right: auto;
+    scale: 4;
+  }
+  
+  .name {
+    margin-right: 61rem;
+    margin-top: 8.5rem;
+    font-size: 1.5rem;
+    color: #000000;
+    text-align: center;
+
+  }
+
+.col {
+    width: 50rem;
+    height: 27rem;
+}
+.footer{
+    margin-top: 1rem;
 }
 
-img {
-    width: 6rem;
-    margin-top: 3rem;
+p{
+    font-size: 1.5rem; 
+    color: aliceblue !important;   
+}
+strong{
+    color: rgb(43, 174, 226);
+}
+.description{
+    margin-top: -2rem;
+    margin-left: 15rem;
+    margin-right: auto;
+    width: 31rem;
+}
+.pagination {
+    margin-right: 16rem;
+    margin-top: -32rem;
+}
+.btn-dir {
+    background-color: #353434;
+    color: #353434;
+    width: 4rem;
+    height: 2.5rem;
+    margin: 1.8rem;
+    cursor: pointer;
 }

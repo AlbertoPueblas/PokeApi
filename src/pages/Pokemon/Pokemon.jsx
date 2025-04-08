@@ -3,18 +3,28 @@ import './Pokemon.css';
 import { bringAllPokemon } from '../../services/apiCalls';
 import { Button, Container, Row } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
+// import Container from 'react-bootstrap/Container';
+// import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
+//-------------------------------------------------------------
 
 const PokemonList = () => {
   const [pokemon, setPokemon] = useState([]);
   const [loading, setLoading] = useState(true);
-  //Pagination
+  // Página y Pokémon actual
   const [currentPage, setCurrentPage] = useState(1);
+  const [currentPokemon, setCurrentPokemon] = useState(null);  // Pokémon actual a mostrar
   const charactersPerPage = 10;
   const [totalCharacters, setTotalCharacters] = useState(0);
 
   useEffect(() => {
     const fetchPokemon = async () => {
-      await bringPokemon(currentPage);
+      const response = await bringPokemon(currentPage);
+      setPokemon(response.results);
+      setTotalCharacters(response.count);
+      setLoading(false);
+      setCurrentPokemon(response.results[0]);  // Establecer el primer Pokémon
     };
     fetchPokemon();
   }, [currentPage]);
@@ -22,25 +32,17 @@ const PokemonList = () => {
   const bringPokemon = async (page) => {
     try {
       const response = await bringAllPokemon(page, charactersPerPage);
-      setPokemon(response.data.results);
-      setTotalCharacters(response.data.count);
-      setLoading(false);
+      return response;
     } catch (error) {
       console.error(error);
     }
-  };
-
-  // 👇 Función para extraer el ID de la URL
-  const getPokemonIdFromUrl = (url) => {
-    const parts = url.split('/');
-    return parts[parts.length - 2];
   };
 
   if (loading) {
     return <div>Cargando Pokémon...</div>;
   }
 
-  //Logica paginacion
+  // Lógica de paginación
   const totalPages = Math.ceil(totalCharacters / charactersPerPage);
 
   const handleNextPage = () => {
@@ -54,50 +56,59 @@ const PokemonList = () => {
       setCurrentPage(prevPage => prevPage - 1);
     }
   };
-
+  console.log(currentPokemon);
 
   return (
-    <div className='design'>
-      <Container>
-        <h1>Lista de Pokémon</h1>
-        <Row xs={12} sm={6} md={3}>
-          <Card className="pokemon-list">
-            {pokemon.map((poke) => {
-              const id = getPokemonIdFromUrl(poke.url);
-              return (
-                <li key={poke.name} className="pokemon-card">
-
-                  <img
-                    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
-                    alt={poke.name}
-                    width="100"
-                  />
-                  <p>{poke.name}</p>
-                </li>
-              );
-            })}
-      <div className="pagination-controls">
-        <Button
-          variant="primary"
-          onClick={handlePrevPage}
-          disabled={currentPage === 1}
-          >
-          Previous
-        </Button>
-        <span>Page {currentPage} of {totalPages}</span>
-        <Button
-          variant="primary"
-          onClick={handleNextPage}
-          disabled={currentPage >= totalPages}
-          >
-          Next
-        </Button>
-      </div>
-          </Card>
+    <Container>
+      <div className="pokedex">
+        <Row xs={2} md={4} lg={6}>
+          <Col></Col>
         </Row>
-      </Container>
-    </div>
+        <Row xs={1} md={2}>
+          <Col>
+            <div className='img-pokemon'>
+              <img
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${currentPokemon.id}.png`}
+                alt={currentPokemon.name} />
+            </div>
+
+          </Col>
+          <Col className='description'>
+            {currentPokemon && (
+              <>
+                <p><strong>Zona de encuentro: </strong>{currentPokemon.location}</p>
+                <p><strong>Movimientos:</strong> {
+                  currentPokemon.moves
+                    .split(',')        // convierte el string en un array
+                    .slice(0, 6)       // agarra solo los primeros 3
+                    .map((move, i) => (
+                      <span key={i}>{move.trim()}{i < 2 ? ', ' : ''}</span>  // muestra con coma
+                    ))}</p>
+              </>
+            )}
+          </Col>
+
+        </Row>
+        <Row className='footer' >
+          <Col className='name'>
+            <h4>{currentPokemon.name}</h4>
+          </Col>
+          <div className='pagination'>
+            <Button className='btn-dir' onClick={handlePrevPage} disabled={currentPage === 1}>
+            </Button>
+            <Button className='btn-dir' onClick={handleNextPage} disabled={currentPage >= totalPages}>
+
+            </Button>
+
+
+          </div>
+          <span>
+            Page {currentPage} of {totalPages}
+          </span>
+        </Row>
+      </div>
+    </Container>
   );
-};
+}
 
 export default PokemonList;
