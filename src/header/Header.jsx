@@ -21,7 +21,7 @@ function Header() {
                     <div className="botonesNav">
                         <Button variant='outline-info' onClick={() => (navigate('Pokemon'))}>Pokemon</Button>
                         <Button variant='outline-success'onClick={() => (navigate('episodes'))}>Episodes</Button>
-                        <Button variant='outline-primary'onClick={() => (navigate('location'))}>Locations</Button>
+                        <Button variant='outline-primary'onClick={() => (navigate('MoreInfo'))}>MoreInfo</Button>
                     </div>
                 </Container>
             </Navbar>

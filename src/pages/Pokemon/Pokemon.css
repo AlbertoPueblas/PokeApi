@@ -4,53 +4,51 @@
     width: 106rem;
     height: 75rem;
     position: relative;
-    /* display: flex; */
     justify-content: center;
     align-items: center;
     background-image: url(../../images/pokedex-png.png);
-  }
-  
-  .img-pokemon {
+}
+
+.img-pokemon {
     margin-top: 4rem;
     margin-left: 6rem;
     margin-right: auto;
-    scale: 4;
-  }
-  
-  .name {
-    margin-right: 61rem;
-    margin-top: 8.5rem;
-    font-size: 1.5rem;
-    color: #000000;
-    text-align: center;
-
-  }
+    scale: 3;
+}
 
 .col {
     width: 50rem;
     height: 27rem;
 }
-.footer{
+
+.footer {
     margin-top: 1rem;
 }
 
-p{
-    font-size: 1.5rem; 
-    color: aliceblue !important;   
+p {
+    font-size: 1.2rem;
+    color: aliceblue !important;
+    font-weight: bold;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
-strong{
+
+strong {
     color: rgb(43, 174, 226);
 }
-.description{
-    margin-top: -2rem;
-    margin-left: 15rem;
+
+.description {
+    display: block;
+    margin-left: 14.5rem;
     margin-right: auto;
-    width: 31rem;
+    max-height: 15rem;
+    width: 33rem;
 }
+
 .pagination {
     margin-right: 16rem;
     margin-top: -32rem;
 }
+
 .btn-dir {
     background-color: #353434;
     color: #353434;
@@ -58,4 +56,59 @@ strong{
     height: 2.5rem;
     margin: 1.8rem;
     cursor: pointer;
+}
+
+.gender {
+    margin-left: auto;
+    margin-right: -9rem;
+    margin-top: 10rem;
+    display: flex;
+    gap: 8rem;
+
+}
+
+.name {
+    margin-right: 61rem;
+    margin-top: -28.5rem;
+    font-size: 1.5rem;
+    color: #000000;
+    text-align: center;
+}
+
+.buttons {
+    margin-top: -33.5rem;
+    margin-right: auto;
+    margin-left: 16.8rem;
+}
+
+.list {
+    margin-top: 10.5rem;
+
+    p {
+        gap: 40rem;
+        margin: 2rem;
+        color: black !important;
+        font-weight: bold;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+}
+
+.pGender {
+    min-width: 12rem;
+    font-weight: bold;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.btn-info {
+    background-color: rgb(11, 109, 27);
+    margin-right: 29rem;
+    margin-top: 1.3rem;
+    border-radius: 50%;
+    width: 7rem;
+    height: 7rem;
+}
+.info {
+    font-size: 3rem;
+    margin-top: 1rem;
+    color: #000000!important;
 }
