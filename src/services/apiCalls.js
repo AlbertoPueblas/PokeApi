@@ -65,19 +65,32 @@ export const bringPokemonId = async (page = 1, limit = 10) => {
 
 
 export const bringAllPokemon = async (page = 1, limit = 10) => {
+  const offset = (page - 1) * limit;
 
-  const offset = (page -1) * limit;
-  const response = await axios.get(`${API_URL}/pokemon?offset=${offset}&limit=${limit}`);
-  console.log('Api',response);
   
-  return {
-    name: name,
-    // id:id,
-    // location: locationName,
-    types,
-    moves // Añadir los movimientos al resultado
-  };
-}
+  try {
+    const response = await axios.get(`${API_URL}/pokemon?offset=${offset}&limit=${limit}`);
+    const basicList = response.data.results;
+    
+    const detailedList = await Promise.all(
+      basicList.map(async (poke) => {
+        const res = await axios.get(poke.url);
+        console.log('res',res.data.name);
+        return res.data;
+      })
+    );
+    
+    return {
+      pokemons: detailedList,
+      total: response.data.count
+    };
+    
+  } catch (error) {
+    console.error("Error al traer los Pokémon:", error);
+    throw error;
+  }
+};
+
 
 export const getPokemonGender = async (pokemonName) => {
   const genderTypes = ['Female', 'Male', 'Genderless'];
